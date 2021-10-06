@@ -1,14 +1,10 @@
-package ex1;
-
+package ex2;
 import java.util.*;
-import java.lang.*;
 
-/*Exercici 1. Creu un objecte de tipus Month amb un atribut "name" (que contingui el nom del mes de l'any).
-Anyada 11 objectes Month (cadascun amb el seu atribut diferent) en un Contenidor Java, a excepció de l'objecte amb atribut "Agost".
-Després, efectuï la inserció en el lloc que correspon a aquest mes i demostri que el Contenidor manté l'ordre correcte.
-*/		
+/*Exercici 2. Asseguri's que el Contenidor utilitzat en el punt anterior no 
+ permet duplicats, i verifiqui'l.*/		
 
-class main
+public class main
 {  
     public static void main(String args[])
     {
@@ -20,16 +16,21 @@ class main
         mList.add( new month("Maig") );
         mList.add( new month("Juny") );
         mList.add( new month("Juliol") );
+        mList.add( new month("Agost") );
         mList.add( new month("Septembre") );
         mList.add( new month("Octubre") );
         mList.add( new month("Novembre") );
         mList.add( new month("Desembre") );
         
         
-        mList.add(7,new month("Agost") );
+        mList.add(new month("Agost") );
         
+        LinkedHashSet<month> linkedHashSet1
+        = new LinkedHashSet<month>(mList);
         
-        for(month mc : mList) {
+
+        
+        for(month mc : linkedHashSet1 ) {
             System.out.println( mc.getDataOne());
         }
 
@@ -43,7 +44,24 @@ class month
 	private String dataOne;
   
     
-    public month(String dataOne ) {
+    @Override
+	public int hashCode() {
+		return Objects.hash(dataOne);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		month other = (month) obj;
+		return Objects.equals(dataOne, other.dataOne);
+	}
+
+	public month(String dataOne ) {
         this.dataOne=dataOne;
       
     }
@@ -52,6 +70,6 @@ class month
         return this.dataOne;
     }
     
- 
     
 }
+
