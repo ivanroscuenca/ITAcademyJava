@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="MongoDb" id="Project-18a5" database="MongoDb" >
+	<schema name="OpticaIvan" >
+		<table name="clients" >
+			<column name="_id" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="nom" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="cp" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="tel" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="email" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="data_reg" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="client_recom" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="compres" type="array[object]" length="800" decimal="0" jt="4999545" mandatory="y" >
+				<column name=" venedor" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="glasses_id" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			</column>
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<fk name="Fk_clients_glasses" virtual="y" to_schema="OpticaIvan" to_table="glasses" >
+				<fk_column name="_id" pk="_id" />
+			</fk>
+		</table>
+		<table name="glasses" >
+			<column name="_id" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="proveidor" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="marca" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="graduació" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="tipus" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="color" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="preu" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<fk name="Fk_glasses_suppliers" virtual="y" to_schema="OpticaIvan" to_table="suppliers" >
+				<fk_column name="proveidor" pk="_id" />
+			</fk>
+		</table>
+		<table name="suppliers" >
+			<column name="_id" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="nom" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="tel" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fax" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="NIF" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="adreça" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="carrer" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="número" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+				<column name="pis" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+				<column name="porta" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+				<column name="ciutat" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="codi postal" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+				<column name="país" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+	</schema>
+	<connector name="MongoDb" database="MongoDb" driver_class="com.dbschema.MongoJdbcDriver" driver_jar="mongojdbc3.1.jar" driver_desc="No Authentication" host="localhost" port="27017" instance="OpticaIvan" user="admin" />
+	<layout name="Main Layout" id="Layout-201b" show_relation="name" >
+		<entity schema="OpticaIvan" name="suppliers" column="adreça" color="BED3F4" x="784" y="48" />
+		<entity schema="OpticaIvan" name="clients" color="3986C1" x="192" y="48" />
+		<entity schema="OpticaIvan" name="clients" column="compres" color="3986C1" x="48" y="48" />
+		<entity schema="OpticaIvan" name="glasses" color="3986C1" x="432" y="48" />
+		<entity schema="OpticaIvan" name="suppliers" color="BED3F4" x="640" y="64" />
+		<script name="Sample" id="Editor-d62" language="SQL" >
+			<string><![CDATA[db.sampleCollection.insert({"SampleKey":"SampleValue"});
+
+db.suppliers.insert({"_id" : 1 , "nom" : "maldull" , "tel" : "658-559-059", "fax" : "93-445-67-98" , "NIF" : "B-56789567",
+						"adreça" : { "carrer" : "sant LLuis",
+									"número" : 19, 
+									"pis" : 2,
+									"porta" : 4,
+									"ciutat" : "Barcelona",
+									"codi postal" : 08015,
+									"país" : "Espanya"}})
+
+db.glasses.insert({"_id" : 1 , "proveidor" : 1 , "marca" : "Afflelou", "graduació" : 1.5 , "tipus" : "metàlic",
+						"color" :  "verd ", "preu" : 100 })
+
+db.clients.insert({ _id : 1, "nom" : "Joan", "cp" : 08846 , "tel" : "658-559-061", "email" : "joanghrd1980@gmail.com", "data_reg" : " 2021-03-10", "client_recom" : 1, 
+					"compres" : [{ " venedor" : "Jordi" , glasses_id : 1},
+								{ " venedor" : "Joana" , glasses_id : 2}]})
+
+]]></string>
+		</script>
+	</layout>
+</project>

@@ -1,0 +1,9 @@
+[{
+  "_id": 1,
+  "proveidor": 1,
+  "marca": "Afflelou",
+  "graduació": 1.5,
+  "tipus": "metàlic",
+  "color": "verd ",
+  "preu": 100
+}]

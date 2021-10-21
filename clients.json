@@ -1,0 +1,19 @@
+[{
+  "_id": 1,
+  "nom": "Joan",
+  "cp": 8846,
+  "tel": "658-559-061",
+  "email": "joanghrd1980@gmail.com",
+  "data_reg": " 2021-03-10",
+  "client_recom": 1,
+  "compres": [
+    {
+      " venedor": "Jordi",
+      "glasses_id": 1
+    },
+    {
+      " venedor": "Joana",
+      "glasses_id": 2
+    }
+  ]
+}]

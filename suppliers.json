@@ -1,0 +1,16 @@
+[{
+  "_id": 1,
+  "nom": "maldull",
+  "tel": "658-559-059",
+  "fax": "93-445-67-98",
+  "NIF": "B-56789567",
+  "adreça": {
+    "carrer": "sant LLuis",
+    "número": 19,
+    "pis": 2,
+    "porta": 4,
+    "ciutat": "Barcelona",
+    "codi postal": 8015,
+    "país": "Espanya"
+  }
+}]
