@@ -1,0 +1,18 @@
+[{
+  "_id": 1,
+  "data_hora": "2021-09-06 15:30",
+  "tipus": "repartiment",
+  "preu_total": 25.5,
+  "repartidor": "Joan",
+  "data_entrega": "2021-09-06 16:00",
+  "productes": [
+    {
+      "producte_id": 1,
+      "quantitat": 2
+    },
+    {
+      "producte_id": 2,
+      "quantitat": 1
+    }
+  ]
+}]

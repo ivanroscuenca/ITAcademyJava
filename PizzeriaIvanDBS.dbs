@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="MongoDb" id="Project-1512" database="MongoDb" >
+	<schema name="PizzeriaIvan" >
+		<table name="botiga" >
+			<column name="_id" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="adreça" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="CP" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="localitat" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="província" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="empleats" type="array[object]" length="800" decimal="0" jt="4999545" mandatory="y" >
+				<column name="nom" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="cognom" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="DNI" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="tel" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="treball" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="clientes" >
+			<column name="_id" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="nombre" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="apellido" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="dirección" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="CP" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="Teléfono" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<fk name="Fk_clientes_localitat" virtual="y" to_schema="PizzeriaIvan" to_table="localitat" >
+				<fk_column name="_id" pk="_id" />
+			</fk>
+			<fk name="Fk_clientes_comandes" virtual="y" to_schema="PizzeriaIvan" to_table="comandes" >
+				<fk_column name="_id" pk="_id" />
+			</fk>
+		</table>
+		<table name="comandes" >
+			<column name="_id" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="data_hora" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="tipus" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="preu_total" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="repartidor" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="data_entrega" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="productes" type="array[object]" length="800" decimal="0" jt="4999545" mandatory="y" >
+				<column name="producte_id" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+				<column name="quantitat" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			</column>
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+			<fk name="Fk_comandes_productes" virtual="y" to_schema="PizzeriaIvan" to_table="productes" >
+				<fk_column name="_id" pk="_id" />
+			</fk>
+			<fk name="Fk_comandes_botiga" virtual="y" to_schema="PizzeriaIvan" to_table="botiga" >
+				<fk_column name="_id" pk="_id" />
+			</fk>
+		</table>
+		<table name="localitat" >
+			<column name="_id" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="localitat" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="provincia" type="array[object]" length="800" decimal="0" jt="4999545" mandatory="y" >
+				<column name="Nom_Provincia" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="productes" >
+			<column name="_id" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<column name="nombre" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="descripció" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="categoria" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="imatge" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="preu" type="integer" length="800" decimal="0" jt="4" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+	</schema>
+	<connector name="MongoDb" database="MongoDb" driver_class="com.dbschema.MongoJdbcDriver" driver_jar="mongojdbc3.1.jar" driver_desc="No Authentication" host="localhost" port="27017" instance="PizzeriaIvan" user="admin" />
+	<layout name="Main Layout" id="Layout-261c" show_relation="name" >
+		<entity schema="PizzeriaIvan" name="botiga" color="3986C1" x="816" y="192" />
+		<entity schema="PizzeriaIvan" name="clientes" color="3986C1" x="48" y="96" />
+		<entity schema="PizzeriaIvan" name="comandes" color="3986C1" x="416" y="112" />
+		<entity schema="PizzeriaIvan" name="botiga" column="empleats" color="3986C1" x="1088" y="128" />
+		<entity schema="PizzeriaIvan" name="localitat" color="3986C1" x="224" y="160" />
+		<entity schema="PizzeriaIvan" name="productes" color="3986C1" x="944" y="48" />
+		<entity schema="PizzeriaIvan" name="comandes" column="productes" color="3986C1" x="640" y="160" />
+		<entity schema="PizzeriaIvan" name="localitat" column="provincia" color="3986C1" x="192" y="320" />
+		<script name="Sample" id="Editor-bff" language="SQL" >
+			<string><![CDATA[db.sampleCollection.insert({"SampleKey":"SampleValue"});
+
+db.clientes.insert({"_id": 1 , "nombre":"juan", "apellido" : "Gómez" , "dirección": " Calle Muntaner 24" , "CP" : "08015" ,"Teléfono" : "666456789"})
+
+db.provincia.insert({"_id":1, "nom" : "Barcelona"})
+
+db.localitat.insert({"_id":1, "localitat" : "Badalona", "provincia":[{ "Nom_Provincia" :"Barcelona"}]})
+
+db.comandes.insert({"_id":1, "data_hora" : "2021-09-06 15:30", "tipus" : "repartiment" , "preu_total": 25.50,
+"repartidor" : "Joan", "data_entrega" :"2021-09-06 16:00",   
+"productes" : [{ "producte_id" :1, "quantitat" : 2} , { "producte_id" :2, "quantitat" : 1}]})
+
+db.productes.insert({"_id" : 1, "nombre" : "pizza 4 formaggi", "descripció" : "pizza 4 quesos con tomate y orégano", "categoria" : "pizza", "imatge": "/imatge/pizza.svg", "preu" : 10,})
+
+db.botiga.insert({"_id" : 1, "adreça" : "Casanova 25", "CP" : "08015", "localitat" : "Barcelona", "província" : "Barcelona",
+		"empleats" :[{ "nom" : "Joan", "cognom" : "Garcia", "DNI" : "36789056L", "tel" : "678905432", "treball" : "repartidor"},
+ 					{ "nom" : "Maria", "cognom" : "Coll", "DNI" : "36889057K", "tel" : "667890345", "treball" : "cuinera"}]})]]></string>
+		</script>
+	</layout>
+</project>

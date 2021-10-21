@@ -1,0 +1,23 @@
+[{
+  "_id": 1,
+  "adreça": "Casanova 25",
+  "CP": "08015",
+  "localitat": "Barcelona",
+  "província": "Barcelona",
+  "empleats": [
+    {
+      "nom": "Joan",
+      "cognom": "Garcia",
+      "DNI": "36789056L",
+      "tel": "678905432",
+      "treball": "cambrer"
+    },
+    {
+      "nom": "Maria",
+      "cognom": "Coll",
+      "DNI": "36889057K",
+      "tel": "667890345",
+      "treball": "cuinera"
+    }
+  ]
+}]
